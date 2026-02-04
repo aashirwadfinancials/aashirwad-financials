@@ -1,0 +1,412 @@
+/* ================================
+   RESET
+================================ */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:#f9fafb;
+  color:#222;
+}
+
+/* ================================
+   COMMON
+================================ */
+section{padding:80px 10%;}
+
+h2{
+  text-align:center;
+  margin-bottom:40px;
+  font-size:32px;
+  color:#0a3d62;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+.btn{
+  background:#0a3d62;
+  color:white;
+  padding:12px 25px;
+  border-radius:5px;
+  text-decoration:none;
+}
+
+.btn:hover{background:#074173;}
+
+.btn-outline{
+  background:transparent;
+  border:2px solid white;
+  margin-left:15px;
+}
+
+/* ================================
+   HEADER
+================================ */
+.main-header{
+  background:linear-gradient(to right,#0a3d62,#1e90ff);
+  min-height:90vh;
+  color:white;
+}
+
+/* ================================
+   NAVBAR
+================================ */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 10%;
+  position:relative;
+}
+
+.logo img{
+  height:70px;
+}
+
+/* Right Controls */
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+/* Open Demat Button */
+.nav-btn{
+  background:#feca57;
+  color:#0a3d62;
+  padding:10px 18px;
+  border-radius:6px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.nav-btn:hover{
+  background:#ffd976;
+}
+
+/* Hamburger */
+.menu-toggle{
+  font-size:28px;
+  color:white;
+  cursor:pointer;
+}
+
+/* ================================
+   MOBILE MENU
+================================ */
+.nav-links{
+  list-style:none;
+  display:none;
+  position:absolute;
+  top:80px;
+  left:0;
+  width:100%;
+  background:#0a3d62;
+  flex-direction:column;
+  text-align:center;
+  padding:20px 0;
+  z-index:999;
+}
+
+.nav-links li{margin:15px 0;}
+
+.nav-links a{
+  color:white;
+  font-size:18px;
+  text-decoration:none;
+}
+
+.nav-links a:hover{color:#feca57;}
+
+.nav-links.show{display:flex;}
+
+/* ================================
+   HERO
+================================ */
+.hero{
+  text-align:center;
+  margin-top:140px;
+  padding:0 20px;
+}
+
+.hero-brand{
+  font-size:18px;
+  letter-spacing:2px;
+  color:#feca57;
+  margin-bottom:10px;
+}
+
+.hero h1{
+  font-size:48px;
+  margin-bottom:15px;
+}
+
+.hero p{font-size:20px;}
+
+.hero-buttons{margin-top:25px;}
+
+.hero-trust{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  font-size:14px;
+  opacity:.9;
+}
+
+/* ================================
+   ABOUT
+================================ */
+.about-container{
+  display:flex;
+  gap:40px;
+}
+
+.about-text{
+  flex:1;
+  font-size:18px;
+  line-height:1.7;
+}
+
+/* ================================
+   SERVICES
+================================ */
+.services-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+}
+
+.service-card{
+  background:#fff;
+  padding:30px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.service-icon{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.service-card h3{color:#0a3d62;}
+
+/* ================================
+   MARKETS
+================================ */
+.markets-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:30px;
+}
+
+.market-box{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+/* ================================
+   PARTNERS
+================================ */
+.partners-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:40px;
+  justify-items:center;
+}
+
+.partner-logo{
+  width:160px;
+  height:90px;
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:8px;
+  box-shadow:0 0 8px rgba(0,0,0,.08);
+}
+
+.partner-logo img{
+  max-width:130px;
+  max-height:70px;
+  object-fit:contain;
+}
+
+/* ================================
+   AWARDS (FIXED SIZE)
+================================ */
+.awards-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
+}
+
+.award-card{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.award-card img{
+  width:100%;
+  max-width:260px;
+  height:240px;
+  object-fit:contain;
+  margin-bottom:15px;
+}
+
+.award-card p{
+  font-size:16px;
+  font-weight:600;
+}
+
+/* ================================
+   TESTIMONIALS
+================================ */
+
+.testimonials-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+.testimonial-card{
+  background:#ffffff;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:0.3s ease;
+}
+
+.testimonial-card:hover{
+  transform:translateY(-5px);
+}
+
+.testimonial-card p{
+  font-style:italic;
+  font-size:16px;
+  line-height:1.6;
+  margin-bottom:15px;
+  color:#333;
+}
+
+.testimonial-card h4{
+  color:#0a3d62;
+  font-size:16px;
+  font-weight:600;
+}
+
+
+/* ================================
+   CONTACT
+================================ */
+.contact-container{
+  display:flex;
+  gap:40px;
+}
+
+.contact-form{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.contact-form input,
+.contact-form textarea{
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+
+.contact-info{
+  flex:1;
+  font-size:18px;
+}
+
+.map-embed{
+  margin-top:15px;
+  border-radius:8px;
+  overflow:hidden;
+}
+
+/* ================================
+   CAREER (FIXED)
+================================ */
+.career-container{
+  display:flex;
+  gap:40px;
+  align-items:flex-start;
+}
+
+.career-text{
+  flex:1;
+  font-size:18px;
+  line-height:1.6;
+}
+
+.career-form{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.career-form input{
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:5px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+.career-form button{
+  padding:14px;
+  background:#0a3d62;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.career-form button:hover{
+  background:#074173;
+}
+
+/* ================================
+   FOOTER
+================================ */
+.footer{
+  background:#0a3d62;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+
+/* ================================
+   MOBILE
+================================ */
+@media(max-width:768px){
+
+  .hero h1{font-size:32px;}
+  .hero p{font-size:16px;}
+
+  .about-container,
+  .contact-container,
+  .career-container{
+    flex-direction:column;
+  }
+
+}
