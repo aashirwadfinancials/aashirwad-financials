@@ -70,3 +70,35 @@ function initMenu(){
   });
 
 }
+
+async function loadMarkets() {
+  try {
+    const res = await fetch("/.netlify/functions/markets");
+    const data = await res.json();
+
+    document.getElementById("nifty").innerText = data.nifty
+      ? data.nifty.toFixed(2)
+      : "Unavailable";
+
+    document.getElementById("sensex").innerText = data.sensex
+      ? data.sensex.toFixed(2)
+      : "Unavailable";
+
+    document.getElementById("banknifty").innerText = data.banknifty
+      ? data.banknifty.toFixed(2)
+      : "Unavailable";
+
+    document.getElementById("gold").innerText = data.gold
+      ? data.gold.toFixed(2)
+      : "Unavailable";
+
+    document.getElementById("silver").innerText = data.silver
+      ? data.silver.toFixed(2)
+      : "Unavailable";
+
+  } catch (err) {
+    console.error("Market load error", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadMarkets);
