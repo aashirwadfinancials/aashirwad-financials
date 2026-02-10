@@ -1,37 +1,27 @@
-export async function handler() {
+exports.handler = async () => {
   try {
-    const API_KEY = process.env.ALPHA_VANTAGE_KEY;
-
-    const urls = {
-      gold: `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=XAUUSD&apikey=${API_KEY}`,
-      silver: `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=XAGUSD&apikey=${API_KEY}`
-    };
-
-    const goldRes = await fetch(urls.gold).then(r => r.json());
-    const silverRes = await fetch(urls.silver).then(r => r.json());
-
-    const getLatestClose = (data) => {
-      const series = data["Time Series (Daily)"];
-      const lastDate = Object.keys(series)[0];
-      return parseFloat(series[lastDate]["4. close"]);
+    // Last trading day closing prices (example values)
+    // Update once daily (manual or cron later)
+    const data = {
+      nifty: 22123.45,
+      sensex: 73123.88,
+      banknifty: 46890.10,
+      gold: 62150,
+      silver: 73420
     };
 
     return {
       statusCode: 200,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nifty: "Refer NSE official close",
-        sensex: "Refer BSE official close",
-        banknifty: "Refer NSE official close",
-        gold: getLatestClose(goldRes),
-        silver: getLatestClose(silverRes)
-      })
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=3600"
+      },
+      body: JSON.stringify(data)
     };
-
-  } catch (e) {
+  } catch (err) {
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Market data unavailable" })
     };
   }
-}
+};
