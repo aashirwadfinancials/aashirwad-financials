@@ -6,16 +6,26 @@ function loadSection(id, file, callback) {
   fetch(file)
     .then(res => res.text())
     .then(data => {
-      document.getElementById(id).innerHTML = data;
-      if (callback) callback();
+      const container = document.getElementById(id);
+      if (!container) return;
+
+      container.innerHTML = data;
+
+      // Run callback ONLY after section is injected
+      if (typeof callback === "function") {
+        callback();
+      }
+    })
+    .catch(err => {
+      console.error(`Failed to load ${file}`, err);
     });
 }
 
-// Load Sections
+// Load Sections (ORDER MATTERS)
 loadSection("header", "sections/header.html", initMenu);
 loadSection("about", "sections/about.html");
 loadSection("services", "sections/services.html");
-loadSection("markets", "sections/markets.html");
+loadSection("markets", "sections/markets.html", loadMarkets); // 👈 IMPORTANT
 loadSection("testimonials", "sections/testimonials.html");
 loadSection("partners", "sections/partners.html");
 loadSection("awards", "sections/awards.html");
@@ -30,7 +40,7 @@ loadSection("footer", "sections/footer.html");
 
 window.addEventListener("scroll", reveal);
 
-function reveal(){
+function reveal() {
   const reveals = document.querySelectorAll(".reveal");
 
   reveals.forEach(el => {
@@ -38,7 +48,7 @@ function reveal(){
     const elementTop = el.getBoundingClientRect().top;
     const elementVisible = 120;
 
-    if(elementTop < windowHeight - elementVisible){
+    if (elementTop < windowHeight - elementVisible) {
       el.classList.add("active");
     }
   });
@@ -49,56 +59,65 @@ function reveal(){
 // Mobile Menu System
 // ----------------------
 
-function initMenu(){
-
+function initMenu() {
   const toggle = document.getElementById("menu-toggle");
   const nav = document.getElementById("nav-links");
 
-  if(!toggle || !nav) return;
+  if (!toggle || !nav) return;
 
-  // Toggle menu
-  toggle.onclick = function(){
+  toggle.onclick = () => {
     nav.classList.toggle("show");
   };
 
-  // Close menu when link clicked
-  const links = nav.querySelectorAll("a");
-  links.forEach(link=>{
-    link.onclick = function(){
-      nav.classList.remove("show");
-    };
+  // Close menu on link click
+  nav.querySelectorAll("a").forEach(link => {
+    link.onclick = () => nav.classList.remove("show");
   });
-
 }
+
+
+// ----------------------
+// Load Live Market Prices
+// ----------------------
 
 async function loadMarkets() {
   try {
     const res = await fetch("/.netlify/functions/markets");
+
+    if (!res.ok) throw new Error("Market API failed");
+
     const data = await res.json();
 
-    document.getElementById("nifty").innerText = data.nifty
-      ? data.nifty.toFixed(2)
-      : "Unavailable";
-
-    document.getElementById("sensex").innerText = data.sensex
-      ? data.sensex.toFixed(2)
-      : "Unavailable";
-
-    document.getElementById("banknifty").innerText = data.banknifty
-      ? data.banknifty.toFixed(2)
-      : "Unavailable";
-
-    document.getElementById("gold").innerText = data.gold
-      ? data.gold.toFixed(2)
-      : "Unavailable";
-
-    document.getElementById("silver").innerText = data.silver
-      ? data.silver.toFixed(2)
-      : "Unavailable";
+    setValue("nifty", data.nifty);
+    setValue("sensex", data.sensex);
+    setValue("banknifty", data.banknifty);
+    setValue("gold", data.gold);
+    setValue("silver", data.silver);
 
   } catch (err) {
-    console.error("Market load error", err);
+    console.error("Market load error:", err);
+    setUnavailable();
   }
 }
 
-document.addEventListener("DOMContentLoaded", loadMarkets);
+
+// ----------------------
+// Helpers
+// ----------------------
+
+function setValue(id, value) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.innerText =
+    typeof value === "number"
+      ? value.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+      : "Unavailable";
+}
+
+function setUnavailable() {
+  ["nifty", "sensex", "banknifty", "gold", "silver"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = "Unavailable";
+  });
+}
