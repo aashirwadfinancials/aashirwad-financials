@@ -16,7 +16,10 @@ function loadSection(id, file, callback) {
 loadSection("header", "sections/header.html", initMenu);
 loadSection("about", "sections/about.html");
 loadSection("services", "sections/services.html");
-loadSection("markets", "sections/markets.html", loadMarkets); // 🔥 KEY FIX
+
+// ✅ IMPORTANT: call loadMarkets AFTER markets.html loads
+loadSection("markets", "sections/markets.html", loadMarkets);
+
 loadSection("testimonials", "sections/testimonials.html");
 loadSection("partners", "sections/partners.html");
 loadSection("awards", "sections/awards.html");
@@ -31,13 +34,15 @@ loadSection("footer", "sections/footer.html");
 
 window.addEventListener("scroll", reveal);
 
-function reveal(){
-  document.querySelectorAll(".reveal").forEach(el => {
+function reveal() {
+  const reveals = document.querySelectorAll(".reveal");
+
+  reveals.forEach(el => {
     const windowHeight = window.innerHeight;
     const elementTop = el.getBoundingClientRect().top;
     const elementVisible = 120;
 
-    if(elementTop < windowHeight - elementVisible){
+    if (elementTop < windowHeight - elementVisible) {
       el.classList.add("active");
     }
   });
@@ -48,11 +53,11 @@ function reveal(){
 // Mobile Menu System
 // ----------------------
 
-function initMenu(){
+function initMenu() {
   const toggle = document.getElementById("menu-toggle");
   const nav = document.getElementById("nav-links");
 
-  if(!toggle || !nav) return;
+  if (!toggle || !nav) return;
 
   toggle.onclick = () => nav.classList.toggle("show");
 
@@ -63,27 +68,35 @@ function initMenu(){
 
 
 // ----------------------
-// Load Live Market Data
+// Load Live Market Prices
 // ----------------------
 
 async function loadMarkets() {
-  console.log("loadMarkets() called");
   try {
     const res = await fetch("/.netlify/functions/markets");
     const data = await res.json();
 
-    const set = (id, value) => {
-      const el = document.getElementById(id);
-      if (el) el.innerText = value ?? "Unavailable";
-    };
+    document.getElementById("nifty").innerText =
+      data.nifty ? Number(data.nifty).toFixed(2) : "Unavailable";
 
-    set("nifty", data.nifty?.toFixed(2));
-    set("sensex", data.sensex?.toFixed(2));
-    set("banknifty", data.banknifty?.toFixed(2));
-    set("gold", data.gold?.toFixed(2));
-    set("silver", data.silver?.toFixed(2));
+    document.getElementById("sensex").innerText =
+      data.sensex ? Number(data.sensex).toFixed(2) : "Unavailable";
+
+    document.getElementById("banknifty").innerText =
+      data.banknifty ? Number(data.banknifty).toFixed(2) : "Unavailable";
+
+    document.getElementById("gold").innerText =
+      data.gold ? Number(data.gold).toFixed(2) : "Unavailable";
+
+    document.getElementById("silver").innerText =
+      data.silver ? Number(data.silver).toFixed(2) : "Unavailable";
 
   } catch (err) {
-    console.error("Market load error", err);
+    console.error("Market load error:", err);
+
+    ["nifty", "sensex", "banknifty", "gold", "silver"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerText = "Unavailable";
+    });
   }
 }
