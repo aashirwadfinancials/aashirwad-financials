@@ -67,6 +67,7 @@ function initMenu(){
 // ----------------------
 
 async function loadMarkets() {
+  console.log("loadMarkets() called");
   try {
     const res = await fetch("/.netlify/functions/markets");
     const data = await res.json();
