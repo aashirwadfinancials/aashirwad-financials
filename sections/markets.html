@@ -1,32 +1,10 @@
 <section id="markets-section">
   <h2>Live Market Prices</h2>
 
-  <!-- TradingView Live Price Ticker -->
-  <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-
-    <script
-      type="text/javascript"
-      src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
-      async>
-    {
-      "symbols": [
-        { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
-        { "proName": "BSE:SENSEX", "title": "SENSEX" },
-        { "proName": "NSE:BANKNIFTY", "title": "BANK NIFTY" },
-        { "proName": "MCX:GOLD1!", "title": "GOLD" },
-        { "proName": "MCX:SILVER1!", "title": "SILVER" }
-      ],
-      "showSymbolLogo": true,
-      "colorTheme": "light",
-      "isTransparent": false,
-      "displayMode": "adaptive",
-      "locale": "in"
-    }
-    </script>
-  </div>
-
-  <p style="text-align:center; font-size:14px; margin-top:15px; color:#555;">
+  <p style="text-align:center; color:#666; margin-bottom:30px;">
     Market data shown is for informational purposes only.
   </p>
+
+  <!-- Widget placeholder -->
+  <div id="market-ticker"></div>
 </section>
