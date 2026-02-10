@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://aashirwadfinancials.com/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://aashirwadfinancials.com/#about-section</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://aashirwadfinancials.com/#services-section</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://aashirwadfinancials.com/#partners-section</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://aashirwadfinancials.com/#markets-section</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://aashirwadfinancials.com/#career-section</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://aashirwadfinancials.com/#contact-section</loc>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
